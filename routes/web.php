@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\OrdersController;
+
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/weather', 'HomeController@weather')->name('weather');
+
+Route::get('/products', 'ProductsController@index')->name('products');
+Route::post('/product/{id}/price', 'ProductsController@editPrice')->name('products.price');
+
+Route::resource('/order','OrdersController');
